@@ -9,38 +9,56 @@
             <v-tab>Item Three</v-tab>
           </v-tabs>
 
-          <v-card class="mx-auto" max-width="400">
-            <v-img
-              class="white--text align-end"
-              height="200px"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            />
+          <v-row class="justify-space-around">
+            <v-card
+              v-for="edge in $page.events.edges"
+              :key="edge.node.id"
+              width="280"
+              class="mt-5"
+            >
+              <v-img
+                class="white--text align-end"
+                height="200px"
+                :src="`http://localhost:1337${edge.node.thumbnail}`"
+              />
 
-            <v-card-subtitle class="pb-0">
-              Number 10
-            </v-card-subtitle>
+              <v-card-title>{{ edge.node.title }}</v-card-title>
 
-            <v-card-text class="text--primary">
-              <div>Whitehaven Beach</div>
+              <v-card-subtitle class="pb-0">
+                {{ edge.node.date }}
+              </v-card-subtitle>
 
-              <div>Whitsunday Island, Whitsunday Islands</div>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-btn color="orange" text>
-                Share
-              </v-btn>
-
-              <v-btn color="orange" text>
-                Explore
-              </v-btn>
-            </v-card-actions>
-          </v-card>
+              <v-card-actions>
+                <v-btn color="orange" text>
+                  More Info
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-row>
         </v-col>
       </v-row>
     </v-container>
   </Layout>
 </template>
+
+<page-query>
+  query {
+    events: allEvent {
+      edges {
+        node {
+          id
+          title
+          description
+          price
+          duration
+          date
+          thumbnail
+          image
+        }
+      }
+    }
+  }
+</page-query>
 
 <script>
 export default {
