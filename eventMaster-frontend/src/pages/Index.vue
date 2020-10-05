@@ -27,7 +27,7 @@
               <v-card-title>{{ edge.node.title }}</v-card-title>
 
               <v-card-subtitle class="pb-0">
-                {{ edge.node.date }}
+                {{ formatDate(edge.node.date) }}
               </v-card-subtitle>
 
               <v-card-actions>
@@ -64,6 +64,8 @@
 </page-query>
 
 <script>
+import moment from "moment";
+
 export default {
   metaInfo: {
     title: "Hello, world!",
@@ -97,6 +99,9 @@ export default {
       this.events = this.$page.events.edges.filter((edge) => {
         return edge.node.category === val;
       });
+    },
+    formatDate(date) {
+      return moment(date).format("MMM Do YYYY, h:mm a");
     },
   },
 };
