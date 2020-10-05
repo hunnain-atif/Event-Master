@@ -5,6 +5,8 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
+const axios = require("axios");
+
 module.exports = function(api) {
   api.chainWebpack((config, { isServer }) => {
     if (isServer) {
@@ -16,14 +18,24 @@ module.exports = function(api) {
     }
   });
 
-  api.loadSource((store) => {
-    // Use the Data store API here: https://gridsome.org/docs/data-store-api
-  });
-  api.loadSource(({ addCollection }) => {
-    // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
-  });
+  api.loadSource(async (actions) => {
+    const { data } = await axios.get("http://localhost:1337/events");
 
-  api.createPages(({ createPage }) => {
-    // Use the Pages API here: https://gridsome.org/docs/pages-api/
+    const collection = actions.addCollection({
+      typeName: "Event",
+    });
+
+    for (const event of data) {
+      collection.addNode({
+        id: event.id,
+        title: event.title,
+        description: event.description,
+        price: event.price,
+        date: event.date,
+        duration: event.duration,
+        thumbnail: event.image.formats.thumbnail.url,
+        image: event.formats.medium.url,
+      });
+    }
   });
 };
