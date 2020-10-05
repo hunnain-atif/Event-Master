@@ -25,8 +25,8 @@
       "type": "decimal"
     },
     "categories": {
-      "collection": "category",
-      "via": "events"
+      "via": "events",
+      "collection": "category"
     },
     "image": {
       "model": "file",

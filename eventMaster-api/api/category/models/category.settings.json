@@ -13,9 +13,12 @@
       "type": "string"
     },
     "events": {
-      "via": "categories",
       "collection": "event",
+      "via": "categories",
       "dominant": true
+    },
+    "relational_id": {
+      "type": "integer"
     }
   }
 }
