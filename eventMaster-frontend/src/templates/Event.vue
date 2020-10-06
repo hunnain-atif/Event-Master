@@ -36,3 +36,21 @@ export default {
   },
 };
 </script>
+
+<style>
+p {
+  margin-top: 25px;
+  width: 750px;
+  text-decoration: none;
+  text-align: justify;
+  font-size: 1.2rem;
+}
+
+img {
+  margin-top: 10px;
+}
+
+h1 {
+  color: #ffa233;
+}
+</style>
