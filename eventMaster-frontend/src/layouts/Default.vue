@@ -1,11 +1,16 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-toolbar-title>Event Master</v-toolbar-title>
+      <v-toolbar-title>
+        <g-link to="/">Event Master</g-link>
+      </v-toolbar-title>
 
       <v-text-field
+        v-model="searchText"
         placeholder="Search"
+        @click:clear="searchText = ''"
         class="ml-8"
+        clearable
         style="max-width: 350px"
         prepend-inner-icon="mdi-magnify"
         outlined
@@ -18,7 +23,7 @@
       <v-btn>Create Event</v-btn>
     </v-app-bar>
     <v-main>
-      <slot />
+      <slot :searchText="searchText" />
     </v-main>
   </v-app>
 </template>
@@ -31,3 +36,21 @@ query {
   }
 }
 </static-query>
+
+<script>
+export default {
+  data() {
+    return {
+      searchText: "",
+    };
+  },
+};
+</script>
+
+
+<style scoped>
+.v-toolbar__title a {
+  text-decoration: none;
+  color: black;
+}
+</style>
